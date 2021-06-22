@@ -1,4 +1,4 @@
-import { useState, useEffect , useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 import ThemeContext from "./ThemeContext";
 import useBreedList from "./useBreedList";
 import Results from "./Results";
@@ -15,7 +15,7 @@ const SearchParams = () => {
 
   useEffect(() => {
     requestPets();
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps.
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps.
 
   async function requestPets() {
     const res = await fetch(
@@ -30,20 +30,25 @@ const SearchParams = () => {
   }
 
   return (
-    <div className="search-params">
-      <form>
-        <label htmlFor="location">
-            Location
+    <div className="my-0 mx-auto w-11/12">
+      <form
+        className="p-10 mb-10 rounded-lg bg-gray-200 
+    shadow-lg flex flex-col justify-items-center items-center divide-y divide-gray-900"
+      >
+        <label className="search-label" htmlFor="location">
+          Location
           <input
+            className="search-control"
             id="location"
             onChange={updateLocation}
             value={location}
             placeholder="location"
           />
         </label>
-        <label htmlFor="animal">
+        <label className="search-label" htmlFor="animal">
           {" Animal"}
           <select
+            className="search-control "
             id="animal"
             value={animal}
             onChange={(e) => setAnimal(e.target.value)}
@@ -57,9 +62,11 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-        <label htmlFor="breed">
+        <label className="search-label" htmlFor="breed">
           {" Breed"}
           <select
+            className="search-control disabled:opacity-50"
+            disabled={!breeds.length}
             id="breed"
             value={breed}
             onChange={(e) => setBreed(e.target.value)}
@@ -74,21 +81,23 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-        <label htmlFor="theme">
+        <label className="search-label" htmlFor="theme">
           Theme
           <select
-          value={theme}
-          onChange={e => setTheme(e.target.value)}
-          onBlur={e => setTheme(e.target.value)}>
-            < option value="darkblue">Dark Blue</option>
-            < option value="peru">Peru</option>
-            < option value="chartreuse">Chartreuse</option>
-            < option value="mediumorchid">Medium Orchid</option>
+            className="search-control"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            onBlur={(e) => setTheme(e.target.value)}
+          >
+            <option value="darkblue">Dark Blue</option>
+            <option value="peru">Peru</option>
+            <option value="chartreuse">Chartreuse</option>
+            <option value="mediumorchid">Medium Orchid</option>
           </select>
         </label>
-        <button style={{backgroundColor: theme }}>Submit</button>
+        <button className="rounded px-6 py-2 text-white hover:opacity-50 border-none" style={{ backgroundColor: theme }}>Submit</button>
       </form>
-      <Results pets={pets}/>
+      <Results pets={pets} />
     </div>
   );
 };
